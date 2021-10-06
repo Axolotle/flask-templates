@@ -1,0 +1,15 @@
+{% extends "base/index.html" %}
+
+{% block main %}
+<div>
+  <h2>{{ post.title }}</h2>
+
+  <div>
+    {{ post.timestamp.strftime('%d/%m/%y %H:%M') }}
+  </div>
+
+  <div>
+    {{ post.content }}
+  </div>
+</div>
+{% endblock %}

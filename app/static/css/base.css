@@ -1,0 +1,10 @@
+body {
+  margin: 0;
+  background-color: black;
+  color: white;
+}
+
+main {
+  width: 90%;
+  max-width: 1024px;
+}

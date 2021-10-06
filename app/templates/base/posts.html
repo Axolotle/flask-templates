@@ -1,0 +1,17 @@
+{% extends "base/index.html" %}
+
+{% block main %}
+<h2>Liste des posts</h2>
+
+<div>
+  <ul>
+    {% for post in posts|reverse %}
+    <li>
+      <a href="{{ url_for('base.post', id=post.id) }}">
+        {{ post.timestamp.strftime('%d/%m/%y %H:%M') }} — {{ post.title }}
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>flask_git_ynh public</title>
+    <meta name="description" content=""/>
+    <meta name="keywords" content="" />
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    {% block stylesheets %}
+    {% endblock %}
+</head>
+<body>
+    <header>
+      <h1>App flask_git_ynh</h1>
+      <nav>
+        <ul>
+          <li><a href="{{ url_for('base.posts') }}">App accueil</a></li>
+          {% block nav %}
+          {% endblock %}
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      {% block main %}
+      {% endblock %}
+    </main>
+
+    <script src="{{ url_for('static', filename='js/base.js') }}"></script>
+    {% block scripts %}
+    {% endblock %}
+</body>
+</html>
