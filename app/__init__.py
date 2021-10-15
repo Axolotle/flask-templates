@@ -3,11 +3,11 @@ import os
 from flask import Flask
 
 from app import client, admin
-from app.extensions import db
+from app.extensions import db, migrate
 from app.commands import admin_cli
 
 
-def create_app(config_name='app.config.ProdConfig'):
+def create_app(config_name='app.config.DevConfig'):
     app = Flask(__name__, instance_relative_config=True)
 
     app.config.from_object(config_name)
@@ -27,6 +27,7 @@ def create_app(config_name='app.config.ProdConfig'):
 
 def register_extensions(app):
     db.init_app(app)
+    migrate.init_app(app, db, compare_type=True)
 
 
 def register_commands(app):
