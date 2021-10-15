@@ -1,6 +1,7 @@
 {
-  "executable": "app:create_app('app.config.ProdConfig')",
   "client_max_body_size": "50M",
   "db_type": "postgresql",
-  "migrations": true
+  "migrations": true,
+  "flask_path": "app",
+  "config_path": "app.config.ProdConfig"
 }
