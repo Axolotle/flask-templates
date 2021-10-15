@@ -1,4 +1,4 @@
-{% extends "base/index.html" %}
+{% extends "client/index.html" %}
 
 {% block main %}
 <h2>Liste des posts</h2>
@@ -7,7 +7,7 @@
   <ul>
     {% for post in posts|reverse %}
     <li>
-      <a href="{{ url_for('base.post', id=post.id) }}">
+      <a href="{{ url_for('client.post', id=post.id) }}">
         {{ post.timestamp.strftime('%d/%m/%y %H:%M') }} — {{ post.title }}
       </a>
     </li>

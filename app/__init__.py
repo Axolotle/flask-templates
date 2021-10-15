@@ -2,7 +2,7 @@ import os
 
 from flask import Flask
 
-from app import base, admin
+from app import client, admin
 from app.extensions import db
 from app.commands import admin_cli
 
@@ -34,5 +34,5 @@ def register_commands(app):
 
 
 def register_blueprints(app):
-    app.register_blueprint(base.routes.bp)
+    app.register_blueprint(client.routes.bp)
     app.register_blueprint(admin.routes.bp, url_prefix=app.config['ADMIN_ROUTE'])

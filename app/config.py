@@ -5,7 +5,6 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 load_dotenv(os.path.realpath(os.path.join(basedir, '../.env')))
 
 
-
 class Config:
     ENV = os.getenv('FLASK_ENV', 'development')
     SECRET_KEY = os.getenv('SECRET_KEY', 'dev')
