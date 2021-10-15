@@ -11,13 +11,14 @@
   {% block stylesheets %}
   {% endblock %}
 </head>
-<body>
-  <header>
+<body class="m-4">
+  <header class="mb-5">
     <h1>Admin flask_git_ynh</h1>
 
     <nav>
       <ul>
-        <li><a href="{{ url_for('admin.posts') }}">Admin accueil</a></li>
+        <li><a href="{{ url_for('admin.posts') }}">Admin Home</a></li>
+        <li><a href="{{ url_for('client.posts') }}">App Home</a></li>
         {% block nav %}
         {% endblock %}
       </ul>
@@ -25,11 +26,24 @@
   </header>
 
   <main>
+    {% with flash_msgs = get_flashed_messages(with_categories=true) %}
+    {% if flash_msgs %}
+    <div class="flash">
+        {% for category, message in flash_msgs %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
     {% block main %}
     {% endblock %}
   </main>
 
-  <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/admin.js') }}" type="module"></script>
   {% block scripts %}
   {% endblock %}
 </body>

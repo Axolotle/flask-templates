@@ -8,7 +8,7 @@
     <meta name="description" content=""/>
     <meta name="keywords" content="" />
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/client.css') }}">
     {% block stylesheets %}
     {% endblock %}
 </head>
@@ -17,7 +17,8 @@
       <h1>App flask_git_ynh</h1>
       <nav>
         <ul>
-          <li><a href="{{ url_for('client.posts') }}">App accueil</a></li>
+          <li><a href="{{ url_for('client.posts') }}">App Home</a></li>
+          <li><a href="{{ url_for('admin.posts') }}">Admin Home</a></li>
           {% block nav %}
           {% endblock %}
         </ul>
