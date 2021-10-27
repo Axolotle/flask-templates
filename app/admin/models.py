@@ -23,14 +23,14 @@ class Post(db.Model):
             return ("ok", 200)
         file.save(filepath)
         media = {
-            "filename": os.path.join('/uploads', filename),
+            "filename": filename,
             "mimetype": file.mimetype
         }
         self.medias.append(media)
         return media
 
     def delete_file(self, filename):
-        filepath = os.path.join(current_app.instance_path, filename.lstrip('/'))
+        filepath = os.path.join(current_app.instance_path, 'uploads', filename)
         for i, media in enumerate(self.medias):
             if filename == media["filename"]:
                 self.medias.pop(i)
@@ -40,8 +40,7 @@ class Post(db.Model):
 
     def delete_medias(self):
         for i, media in enumerate(self.medias):
-            path = os.path.join(current_app.instance_path,
-                                media["filename"].lstrip('/'))
+            path = os.path.join(current_app.instance_path, 'uploads', media["filename"])
             if os.path.exists(path):
                 os.remove(path)
                 return True

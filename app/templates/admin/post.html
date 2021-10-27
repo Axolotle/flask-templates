@@ -28,7 +28,7 @@
   <ul>
     {% for img in form.medias %}
     <li>
-      <img src="{{ img.filename.data }}" style="max-width: 300px;">
+      <img src="{{ url_for('uploads.static', filename=img.filename.data) }}" style="max-width: 300px;">
       <form action="{{ url_for('admin.delete_file', id=id) }}" method="post">
       <input hidden name="filename" value={{ img.filename.data }}>
       {{ img.delete(class='btn btn-danger') }}
