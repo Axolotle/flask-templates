@@ -7,7 +7,7 @@
   {{ form.hidden_tag() }}
 
   {% for item in form %}
-  {% if item.type not in ['CSRFTokenField', 'SubmitField', 'HiddenField'] %}
+  {% if item.type not in ['CSRFTokenField', 'SubmitField', 'HiddenField', 'FieldList'] %}
   <p>
     {{ item.label }}<br>
     {{ item }}<br>
@@ -21,6 +21,28 @@
 
   <p>{{ form.submit(class='btn btn-success') }}</p>
 </form>
+
+{% if upload %}
+<div class="mt-5">
+  {{ form.medias.label }}
+  <ul>
+    {% for img in form.medias %}
+    <li>
+      <img src="{{ img.filename.data }}" style="max-width: 300px;">
+      <form action="{{ url_for('admin.delete_file', id=id) }}" method="post">
+      <input hidden name="filename" value={{ img.filename.data }}>
+      {{ img.delete(class='btn btn-danger') }}
+      </form>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <form action="{{ url_for('admin.upload_file', id=id) }}" method="post" enctype=multipart/form-data>
+    {{ upload.file }}
+    {{ upload.submit(class='btn btn-success') }}
+  </form>
+</div>
+{% endif %}
 {% endblock %}
 
 {% block scripts %}

@@ -7,14 +7,14 @@ from app.extensions import db, migrate
 from app.commands import admin_cli
 
 
-def create_app(config_name='app.config.DevConfig'):
-    app = Flask(__name__, instance_relative_config=True)
+def create_app(config_name='app.config.DevConfig', instance_path=None):
+    app = Flask(__name__, instance_path=instance_path)
 
     app.config.from_object(config_name)
 
     # ensure the instance folder exists
     try:
-        os.makedirs(app.instance_path)
+        os.makedirs(os.path.join(app.instance_path, 'uploads'))
     except OSError:
         pass
 
@@ -37,3 +37,9 @@ def register_commands(app):
 def register_blueprints(app):
     app.register_blueprint(client.routes.bp)
     app.register_blueprint(admin.routes.bp, url_prefix=app.config['ADMIN_ROUTE'])
+
+    # allow werkzeug to serve static files from instance_path in dev mode
+    if (app.config["ENV"] == 'development'):
+        with app.app_context():
+            from app import uploads
+            app.register_blueprint(uploads.bp, url_prefix='/uploads')
