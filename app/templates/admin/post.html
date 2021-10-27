@@ -38,6 +38,7 @@
   </ul>
 
   <form action="{{ url_for('admin.upload_file', id=id) }}" method="post" enctype=multipart/form-data>
+    {{ upload.hidden_tag() }}
     {{ upload.file }}
     {{ upload.submit(class='btn btn-success') }}
   </form>
