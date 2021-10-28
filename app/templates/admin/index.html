@@ -7,6 +7,7 @@
   <meta name="robots" content="noindex, nofollow">
   <title>flask_git_ynh private</title>
 
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/vendors/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
   {% block stylesheets %}
   {% endblock %}
@@ -43,6 +44,7 @@
     {% endblock %}
   </main>
 
+  <script src="{{ url_for('static', filename='js/vendors/bootstrap.bundle.min.js') }}"></script>
   <script src="{{ url_for('static', filename='js/admin.js') }}" type="module"></script>
   {% block scripts %}
   {% endblock %}
