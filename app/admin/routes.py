@@ -1,6 +1,6 @@
-from flask import Blueprint, request, render_template, redirect, url_for, abort, flash
+from flask import Blueprint, request, render_template, redirect, url_for, abort, flash, session, g
 
-from app.extensions import db
+from app.extensions import db, ldap
 from app.admin.forms import PostForm, UploadFileForm
 from app.admin.models import Post
 
@@ -16,9 +16,29 @@ def get_post(id):
 
 @bp.get('/')
 @bp.get('/posts')
+@ldap.login_required
 def posts():
     posts = Post.query.all()
     return render_template('admin/posts.html', posts=posts)
+
+
+@bp.route('/login', methods=['GET', 'POST'])
+def login():
+    if g.user:
+        return redirect(url_for('admin.posts'))
+    if request.method == 'POST':
+        user = request.form['user']
+        passwd = request.form['passwd']
+        test = ldap.bind_user(user, passwd)
+        if test is None or passwd == '':
+            return 'Invalid credentials'
+        else:
+            session['user_id'] = request.form['user']
+            return redirect('/')
+    return """<form action="" method="post">
+                user: <input name="user"><br>
+                password:<input type="password" name="passwd"><br>
+                <input type="submit" value="Submit"></form>"""
 
 
 @bp.route('/posts/create', methods=['GET', 'POST'])

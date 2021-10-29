@@ -1,9 +1,9 @@
 import os
 
-from flask import Flask
+from flask import Flask, g, session
 
 from app import client, admin
-from app.extensions import db, migrate
+from app.extensions import db, migrate, ldap
 from app.commands import admin_cli
 
 
@@ -28,6 +28,16 @@ def create_app(config_name='app.config.DevConfig', instance_path=None):
 def register_extensions(app):
     db.init_app(app)
     migrate.init_app(app, db, compare_type=True)
+    ldap.init_app(app)
+
+    @app.before_request
+    def before_request():
+        g.user = None
+        if 'user_id' in session:
+            # This is where you'd query your database to get the user info.
+            g.user = {}
+            # Create a global with the LDAP groups the user is a member of.
+            g.ldap_groups = ldap.get_user_groups(user=session['user_id'])
 
 
 def register_commands(app):
