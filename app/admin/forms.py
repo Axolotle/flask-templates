@@ -32,4 +32,5 @@ class PostForm(FlaskForm):
     timestamp = DateTimeField('Date', validators=[required], default=datetime.now)
     content = TextAreaField('Content')
     medias = FieldList(FormField(MediaForm))
+    new_field = StringField('New field', validators=[required, Length(min=5)])
     submit = SubmitField('Save')

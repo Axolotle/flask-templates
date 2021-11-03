@@ -15,6 +15,7 @@ class Post(db.Model):
     timestamp = db.Column(db.DateTime, index=True)
     content = db.Column(db.UnicodeText, nullable=False, default="")
     medias = db.Column(MutableList.as_mutable(db.PickleType), default=[])
+    new_field = db.Column(db.String, default="")
 
     def upload_file(self, file):
         filename = secure_filename(file.filename)

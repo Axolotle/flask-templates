@@ -8,6 +8,8 @@ instance/
 dist/
 build/
 node_modules/
+.npm/
+.config/
 
 .env
 gunicorn.conf.py
