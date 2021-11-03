@@ -8,7 +8,7 @@ from app.commands import admin_cli
 
 
 def create_app(config_name='app.config.DevConfig', instance_path=None):
-    app = Flask(__name__, instance_path=instance_path)
+    app = Flask(__name__, instance_path=instance_path, static_folder="dist")
 
     app.config.from_object(config_name)
 

@@ -3,5 +3,6 @@
   "db_type": "postgresql",
   "migrations": true,
   "flask_path": "app",
-  "config_path": "app.config.ProdConfig"
+  "config_path": "app.config.ProdConfig",
+  "js_path": "app/static"
 }

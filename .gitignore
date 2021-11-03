@@ -7,6 +7,7 @@ __pycache__/
 instance/
 dist/
 build/
+node_modules/
 
 .env
 gunicorn.conf.py
