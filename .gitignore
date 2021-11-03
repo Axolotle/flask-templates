@@ -2,9 +2,11 @@ venv/
 
 *.pyc
 __pycache__/
+.cache/
 
 instance/
 dist/
 build/
 
 .env
+gunicorn.conf.py
